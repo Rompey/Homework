@@ -1,7 +1,10 @@
-package project1;
+package project1.services;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
+import project1.domain.User;
+import project1.repositories.UserRepository;
+import project1.dto.UserDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,7 +49,6 @@ public class UserServiceImpl implements UserService {
     @NotNull
     private UserDTO getUserDTO(User user) {
         return new UserDTO(
-                user.getId(),
                 user.getBirthday(),
                 user.getName(),
                 user.getEmail());

@@ -1,4 +1,7 @@
-package project1;
+package project1.services;
+
+import project1.domain.User;
+import project1.dto.UserDTO;
 
 import java.util.List;
 

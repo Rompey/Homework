@@ -1,9 +1,12 @@
-package project1;
+package project1.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import project1.domain.User;
+import project1.dto.UserDTO;
+import project1.services.UserService;
 
 import java.util.List;
 
