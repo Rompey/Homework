@@ -22,5 +22,5 @@ public class Company{
     @Column(name = "taxi_driver_income")
     private String taxiDriverIncome;
     @Column(name = "company_income")
-    private Integer companyIncome;
+    private int companyIncome;
 }
