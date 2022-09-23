@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project1.domain.User;
 import project1.dto.UserDTO;
+import project1.dto.UserFilterDTO;
 import project1.services.UserService;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserDTO> getUsers(){
-        return userService.getUsers();
+    public List<UserDTO> getUsers(UserFilterDTO userFilterDTO){
+        return userService.getUsers(userFilterDTO);
     }
 
     @DeleteMapping

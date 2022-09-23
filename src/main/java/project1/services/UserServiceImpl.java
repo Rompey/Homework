@@ -3,6 +3,7 @@ package project1.services;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import project1.domain.User;
+import project1.dto.UserFilterDTO;
 import project1.repositories.UserRepository;
 import project1.dto.UserDTO;
 
@@ -39,8 +40,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getUsers() {
-        List<User> users = userRepository.findAll();
+    public List<UserDTO> getUsers(UserFilterDTO userFilterDTO) {
+        List<User> users;
+        if(userFilterDTO.getSearchName() != null){
+            users = userRepository.findUsersByName(userFilterDTO.getSearchName());
+        } else {
+            users = userRepository.findAll();
+        }
         return users.stream()
                 .map(this::getUserDTO)
                 .collect(Collectors.toList());
