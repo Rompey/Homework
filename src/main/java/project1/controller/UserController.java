@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project1.domain.User;
 import project1.dto.UserDTO;
 import project1.dto.UserFilterDTO;
 import project1.services.UserService;
@@ -39,17 +38,17 @@ public class UserController {
     }
 
     @GetMapping("/email/{email}")
-    public User getUserByEmail(@PathVariable(value = "email") String email) {
+    public UserDTO getUserByEmail(@PathVariable(value = "email") String email) {
         return userService.getUserByEmail(email);
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable(value = "id") Integer id){
+    public UserDTO getUserById(@PathVariable(value = "id") Integer id){
         return userService.getUserById(id);
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> saveUser(@RequestBody User user){
-        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
+    public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO){
+        return new ResponseEntity<>(userService.saveUser(userDTO), HttpStatus.CREATED);
     }
 }

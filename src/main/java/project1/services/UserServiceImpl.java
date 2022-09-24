@@ -1,11 +1,11 @@
 package project1.services;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import project1.domain.User;
-import project1.dto.UserFilterDTO;
-import project1.repositories.UserRepository;
 import project1.dto.UserDTO;
+import project1.dto.UserFilterDTO;
+import project1.mapping.UserMapper;
+import project1.repositories.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,13 +19,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        return userRepository.findUserByEmail(email);
+    public UserDTO getUserByEmail(String email) {
+        User user = userRepository.findUserByEmail(email);
+        return UserMapper.MAPPER.map(user);
     }
 
     @Override
-    public User getUserById(Integer id) {
-        return userRepository.findUserById(id);
+    public UserDTO getUserById(Integer id) {
+        User user = userRepository.findUserById(id);
+        return UserMapper.MAPPER.map(user);
     }
 
     @Override
@@ -48,21 +50,13 @@ public class UserServiceImpl implements UserService {
             users = userRepository.findAll();
         }
         return users.stream()
-                .map(this::getUserDTO)
+                .map(UserMapper.MAPPER::map)
                 .collect(Collectors.toList());
     }
 
-    @NotNull
-    private UserDTO getUserDTO(User user) {
-        return new UserDTO(
-                user.getBirthday(),
-                user.getName(),
-                user.getEmail());
-    }
-
     @Override
-    public UserDTO saveUser(User user) {
-        User save = userRepository.save(user);
-        return getUserDTO(save);
+    public UserDTO saveUser(UserDTO userDTO) {
+        User save = userRepository.save(UserMapper.MAPPER.map(userDTO));
+        return UserMapper.MAPPER.map(save);
     }
 }

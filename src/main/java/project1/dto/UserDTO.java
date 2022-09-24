@@ -1,6 +1,15 @@
 package project1.dto;
 
-import java.sql.Timestamp;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record UserDTO(Timestamp birthday, String name, String email) {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserDTO {
+    private String name;
+    private String email;
 }
