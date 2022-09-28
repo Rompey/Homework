@@ -1,5 +1,6 @@
 package project1.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
+    @ApiResponse(description = "Show all users")
     public List<UserDTO> getUsers(UserFilterDTO userFilterDTO){
         return userService.getUsers(userFilterDTO);
     }
