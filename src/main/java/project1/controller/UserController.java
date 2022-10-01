@@ -10,8 +10,6 @@ import project1.dto.UserDTO;
 import project1.dto.UserFilterDTO;
 import project1.services.UserService;
 
-import java.util.List;
-
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/api/users", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -21,34 +19,34 @@ public class UserController {
 
     @GetMapping
     @ApiResponse(description = "Show all users")
-    public List<UserDTO> getUsers(UserFilterDTO userFilterDTO){
-        return userService.getUsers(userFilterDTO);
-    }
-
-    @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeAll(){
-        userService.removeAll();
+    public Iterable<UserDTO> getUsers(UserFilterDTO userFilterDTO,
+                                      @RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "6") int size) {
+        return userService.getUsers(userFilterDTO, page, size);
     }
 
     @DeleteMapping("/{email}")
+    @ApiResponse(description = "Remove a user by email")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeUserByEmail(@PathVariable(value = "email") String email){
+    public void removeUserByEmail(@PathVariable(value = "email") String email) {
         userService.removeUserByEmail(email);
     }
 
     @GetMapping("/email/{email}")
+    @ApiResponse(description = "Show a user by email")
     public UserDTO getUserByEmail(@PathVariable(value = "email") String email) {
         return userService.getUserByEmail(email);
     }
 
     @GetMapping("/{id}")
-    public UserDTO getUserById(@PathVariable(value = "id") Integer id){
+    @ApiResponse(description = "Show a user by id")
+    public UserDTO getUserById(@PathVariable(value = "id") Integer id) {
         return userService.getUserById(id);
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO){
+    @ApiResponse(description = "Add a new user")
+    public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
         return new ResponseEntity<>(userService.saveUser(userDTO), HttpStatus.CREATED);
     }
 }
