@@ -1,5 +1,6 @@
 package project1.repositories;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,5 +14,5 @@ public interface UserRepository extends JpaRepository<User, Long>, CrudRepositor
 
     User findUserById(Integer id);
 
-    List<User> findUsersByName(String name);
+    List<User> findUsersByName(String name, Pageable pageable);
 }

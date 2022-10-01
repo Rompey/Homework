@@ -1,5 +1,7 @@
 package project1.services;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import project1.domain.User;
 import project1.dto.UserDTO;
@@ -7,8 +9,8 @@ import project1.dto.UserFilterDTO;
 import project1.mapping.UserMapper;
 import project1.repositories.UserRepository;
 
-import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,19 +39,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeAll() {
-        userRepository.deleteAll();
-    }
-
-    @Override
-    public List<UserDTO> getUsers(UserFilterDTO userFilterDTO) {
-        List<User> users;
+    public Iterable<UserDTO> getUsers(UserFilterDTO userFilterDTO, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Iterable<User> users;
         if(userFilterDTO.getSearchName() != null){
-            users = userRepository.findUsersByName(userFilterDTO.getSearchName());
+            users = userRepository.findUsersByName(userFilterDTO.getSearchName(), pageable);
         } else {
             users = userRepository.findAll();
         }
-        return users.stream()
+        return StreamSupport.stream(users.spliterator(), false)
                 .map(UserMapper.MAPPER::map)
                 .collect(Collectors.toList());
     }
