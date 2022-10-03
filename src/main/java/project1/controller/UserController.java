@@ -52,6 +52,7 @@ public class UserController {
     }
 
     @GetMapping("/page")
+    @ApiResponse(description = "Show a page of users filtered by name")
     public Page<UserDTO> getUsersByName(@RequestParam(required = false) String name,
                                      @RequestParam(defaultValue = "0") int page,
                                      @RequestParam(defaultValue = "6") int size){
