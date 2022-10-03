@@ -2,6 +2,7 @@ package project1.controller;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import project1.dto.UserDTO;
 import project1.dto.UserFilterDTO;
 import project1.services.UserService;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -19,10 +22,8 @@ public class UserController {
 
     @GetMapping
     @ApiResponse(description = "Show all users")
-    public Iterable<UserDTO> getUsers(UserFilterDTO userFilterDTO,
-                                      @RequestParam(defaultValue = "0") int page,
-                                      @RequestParam(defaultValue = "6") int size) {
-        return userService.getUsers(userFilterDTO, page, size);
+    public List<UserDTO> getUsers(UserFilterDTO userFilterDTO) {
+        return userService.getUsers(userFilterDTO);
     }
 
     @DeleteMapping("/{email}")
@@ -48,5 +49,12 @@ public class UserController {
     @ApiResponse(description = "Add a new user")
     public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
         return new ResponseEntity<>(userService.saveUser(userDTO), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/page")
+    public Page<UserDTO> getUsersByName(@RequestParam(required = false) String name,
+                                     @RequestParam(defaultValue = "0") int page,
+                                     @RequestParam(defaultValue = "6") int size){
+        return userService.getUsersByName(name, page, size);
     }
 }
