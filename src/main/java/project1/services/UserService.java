@@ -13,4 +13,5 @@ public interface UserService {
     List<UserDTO> getUsers(UserFilterDTO userFilterDTO);
     UserDTO saveUser(UserDTO userDTO);
     Page<UserDTO> getUsersByName(String name, int page, int size);
+    List<UserDTO> getUsersByCountry();//
 }
