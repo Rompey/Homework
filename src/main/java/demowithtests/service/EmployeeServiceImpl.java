@@ -6,13 +6,14 @@ import demowithtests.util.ResourceNotFoundException;
 import demowithtests.util.ResourceWasDeletedException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @AllArgsConstructor
 @Slf4j
-@org.springframework.stereotype.Service
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final Repository repository;

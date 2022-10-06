@@ -10,9 +10,9 @@ import project1.dto.UserDTO;
 public interface PageDtoToEntityMapper {
 
     PageDtoToEntityMapper PAGE_DTO_TO_ENTITY_MAPPER = Mappers.getMapper(PageDtoToEntityMapper.class);
-        UserDTO toRest(User entity);
+        UserDTO toRest(User user);
 
-        default Page<UserDTO> toRest(Page<User> page) {
-            return page.map(this::toRest);
+        default Page<UserDTO> toRest(Page<User> users) {
+            return users.map(this::toRest);
         }
     }

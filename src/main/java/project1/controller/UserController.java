@@ -58,4 +58,9 @@ public class UserController {
                                      @RequestParam(defaultValue = "6") int size){
         return userService.getUsersByName(name, page, size);
     }
+
+    @GetMapping("/country")
+    public List<UserDTO> getUsersByCountry(){
+        return userService.getUsersByCountry();
+    }
 }

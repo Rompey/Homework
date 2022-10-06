@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
             users = userRepository.findAll();
         }
         return users.stream()
-                .map(UserMapper.MAPPER::map)
+                .map(UserMapper.MAPPER::map)//
                 .collect(Collectors.toList());
     }
 
@@ -64,5 +64,14 @@ public class UserServiceImpl implements UserService {
         Pageable pageable = PageRequest.of(page, size);
         Page<User> users = userRepository.findUsersByNameContaining(name, pageable);
         return PageDtoToEntityMapper.PAGE_DTO_TO_ENTITY_MAPPER.toRest(users);
+    }
+
+    @Override
+    public List<UserDTO> getUsersByCountry() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(UserMapper.MAPPER::map)
+                .filter(user -> user.getCountry().contains("Ukraine"))
+                .collect(Collectors.toList());
     }
 }
