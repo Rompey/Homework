@@ -68,10 +68,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> getUsersByCountry() {
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepository.findAll();//
         return users.stream()
                 .map(UserMapper.MAPPER::map)
                 .filter(user -> user.getCountry().contains("Ukraine"))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());//
     }
 }
