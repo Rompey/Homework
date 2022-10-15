@@ -9,8 +9,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
-    private String name;
-    private String email;
-    private AddressDTO address;
+public class AddressDTO {
+    private Integer id;
+    private String country;
+    private String city;
+    private String street;
+    private String home;
+    private Integer postIndex;
 }

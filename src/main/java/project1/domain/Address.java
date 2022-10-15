@@ -7,22 +7,21 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.time.Instant;
 
-@Table(name = "users")
 @Entity
 @Getter
 @Setter
+@Table(name = "address")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Timestamp birthday = Timestamp.from(Instant.now());
-    private String name;
-    private String email;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Address address;
+    private String country;
+    private String city;
+    private String street;
+    private String home;
+    @Column(name = "post_index")
+    private Integer postIndex;
 }
