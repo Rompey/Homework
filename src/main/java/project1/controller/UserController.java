@@ -3,15 +3,14 @@ package project1.controller;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project1.dto.UserDTO;
-import project1.dto.UserFilterDTO;
+import project1.dto.user_dto.UserCreateDTO;
+import project1.dto.user_dto.UserDTO;
 import project1.services.UserService;
-
-import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -19,12 +18,6 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
-    @GetMapping
-    @ApiResponse(description = "Show all users")
-    public List<UserDTO> getUsers(UserFilterDTO userFilterDTO) {
-        return userService.getUsers(userFilterDTO);
-    }
 
     @DeleteMapping("/{email}")
     @ApiResponse(description = "Remove a user by email")
@@ -47,20 +40,13 @@ public class UserController {
 
     @PostMapping
     @ApiResponse(description = "Add a new user")
-    public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserCreateDTO> saveUser(@RequestBody UserCreateDTO userDTO) {
         return new ResponseEntity<>(userService.saveUser(userDTO), HttpStatus.CREATED);
     }
 
-    @GetMapping("/page")
+    @GetMapping
     @ApiResponse(description = "Show a page of users filtered by name")
-    public Page<UserDTO> getUsersByName(@RequestParam(required = false) String name,
-                                     @RequestParam(defaultValue = "0") int page,
-                                     @RequestParam(defaultValue = "6") int size){
-        return userService.getUsersByName(name, page, size);
-    }
-
-    @GetMapping("/country")
-    public List<UserDTO> getUsersByCountry(){
-        return userService.getUsersByCountry();//
+    public Page<UserDTO> getUsers(String name, Pageable pageable) {
+        return userService.getUsersPage(name, pageable);
     }
 }

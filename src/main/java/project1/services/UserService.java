@@ -1,17 +1,19 @@
 package project1.services;
 
 import org.springframework.data.domain.Page;
-import project1.dto.UserDTO;
-import project1.dto.UserFilterDTO;
-
-import java.util.List;
+import org.springframework.data.domain.Pageable;
+import project1.dto.user_dto.UserCreateDTO;
+import project1.dto.user_dto.UserDTO;
 
 public interface UserService {
     UserDTO getUserByEmail(String email);
+
     UserDTO getUserById(Integer id);
+
     void removeUserByEmail(String email);
-    List<UserDTO> getUsers(UserFilterDTO userFilterDTO);
-    UserDTO saveUser(UserDTO userDTO);
-    Page<UserDTO> getUsersByName(String name, int page, int size);
-    List<UserDTO> getUsersByCountry();//
+
+    UserCreateDTO saveUser(UserCreateDTO userDTO);
+
+    Page<UserDTO> getUsersPage(String name, Pageable pageable);
+
 }
