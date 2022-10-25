@@ -7,12 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import project1.domain.User;
 
-import java.util.List;
-
 public interface UserRepository extends JpaRepository<User, Long>, CrudRepository<User, Long> {
     @Query(value = "SELECT * FROM users WHERE email=?", nativeQuery = true)
     User findUserByEmail(String email);
     User findUserById(Integer id);
-    List<User> findUsersByName(String name);
-    Page<User> findUsersByNameContaining(String name, Pageable pageable);
+
+    Page<User> findUsersByName(String name, Pageable pageable);
 }

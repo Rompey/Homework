@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +24,8 @@ public class User implements Serializable {
     private Timestamp birthday = Timestamp.from(Instant.now());
     private String name;
     private String email;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.MERGE})
+    @ManyToOne
+    @JoinColumn(name = "address_id")
     private Address address;
 }
