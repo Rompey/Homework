@@ -1,4 +1,4 @@
-package project1.dto;
+package project1.dto.address_dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

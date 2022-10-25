@@ -7,8 +7,7 @@ CREATE TABLE IF NOT EXISTS postgres.addresses
     post_index integer,
     street character varying(255) COLLATE pg_catalog."default"
 )
-
-    TABLESPACE pg_default;
+TABLESPACE pg_default;
 
 CREATE TABLE IF NOT EXISTS postgres.users
 (
