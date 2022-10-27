@@ -3,8 +3,8 @@ package project1.mapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import project1.domain.User;
-import project1.dto.user_dto.UserCreateDTO;
-import project1.dto.user_dto.UserDTO;
+import project1.dto.UserCreateDTO;
+import project1.dto.UserDTO;
 
 
 @Mapper
