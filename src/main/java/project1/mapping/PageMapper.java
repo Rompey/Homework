@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
 import project1.domain.User;
-import project1.dto.user_dto.UserDTO;
+import project1.dto.UserDTO;
 
 @Mapper
 public interface PageMapper {

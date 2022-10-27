@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project1.dto.user_dto.UserCreateDTO;
-import project1.dto.user_dto.UserDTO;
+import project1.dto.UserCreateDTO;
+import project1.dto.UserDTO;
 import project1.services.UserService;
 
 @AllArgsConstructor
