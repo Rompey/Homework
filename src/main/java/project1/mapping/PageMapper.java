@@ -16,4 +16,10 @@ public interface PageMapper {
     default Page<UserDTO> toRest(Page<User> users) {
         return users.map(this::toRest);
     }
+
+    UserDTO createMapping(User user);
+
+    default Page<UserDTO> createMapping(Page<User> users){
+        return users.map(this::createMapping);
+    }
 }

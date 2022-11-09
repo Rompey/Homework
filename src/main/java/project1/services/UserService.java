@@ -15,5 +15,4 @@ public interface UserService {
     UserCreateDTO saveUser(UserCreateDTO userDTO);
 
     Page<UserDTO> getUsersPage(String name, Pageable pageable);
-
 }
