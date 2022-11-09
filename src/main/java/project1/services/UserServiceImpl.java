@@ -57,14 +57,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Page<UserDTO> getUsersPage(String name, Pageable pageable) {
         Page<User> users = getUsers(name, pageable);
-        return PageMapper.MAPPER.toRest(users);
+        return PageMapper.MAPPER.createMapping(users);
     }
 
     private Page<User> getUsers(String name, Pageable pageable) {
         if (name != null) {
             return userRepository.findUsersByName(name, pageable);
-        } else {
-            return userRepository.findAll(pageable);
         }
+            return userRepository.findAll(pageable);
     }
 }

@@ -1,7 +1,7 @@
 package project1.controller;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ import project1.dto.UserCreateDTO;
 import project1.dto.UserDTO;
 import project1.services.UserService;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
@@ -45,8 +45,8 @@ public class UserController {
     }
 
     @GetMapping
-    @ApiResponse(description = "Show a page of users filtered by name")
-    public Page<UserDTO> getUsers(String name, Pageable pageable) {
+    @ApiResponse(description = "Show a page of users")
+    public Page<UserDTO> getUsers(String name, Pageable pageable){
         return userService.getUsersPage(name, pageable);
     }
 }
