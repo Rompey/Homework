@@ -21,14 +21,19 @@ public class WebSecurityConfigurer {
                 .password(passwordEncoder().encode("password"))
                 .authorities("ROLE_USER")
                 .build();
-        return new InMemoryUserDetailsManager(user);
+        UserDetails admin = User.withUsername("admin")
+                .password(passwordEncoder().encode("12345"))
+                .authorities("ROLE_ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(user, admin);
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/api/users")
-                .permitAll()
+                .hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
