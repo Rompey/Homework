@@ -64,6 +64,6 @@ public class UserServiceImpl implements UserService {
         if (name != null) {
             return userRepository.findUsersByName(name, pageable);
         }
-            return userRepository.findAll(pageable);
+        return userRepository.findAll(pageable);
     }
 }
