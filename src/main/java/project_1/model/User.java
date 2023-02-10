@@ -17,6 +17,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 public class User implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
