@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project_1.model.User;
-import project_1.model.dto.AddressDTO;
 import project_1.model.dto.UserCreateDTO;
 import project_1.model.dto.UserDTO;
 import project_1.repositories.UserRepository;
@@ -20,14 +19,14 @@ public class RegistrationService {
     public UserDTO saveUser(UserCreateDTO userCreateDTO) {
         User save = userRepository.save(buildUser(userCreateDTO));
 
-        return new UserDTO(save.getUsername(), save.getEmail(), new AddressDTO());
+        return new UserDTO(save.getUsername(), save.getEmail());
     }
 
     private User buildUser(UserCreateDTO userCreateDTO) {
         return User.builder()
-                .username(userCreateDTO.getUsername())
-                .password(ArgonUtil.encode(userCreateDTO.getPassword()))
-                .email(userCreateDTO.getEmail())
+                .username(userCreateDTO.username())
+                .password(ArgonUtil.encode(userCreateDTO.password()))
+                .email(userCreateDTO.email())
                 .build();
     }
 }

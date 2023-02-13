@@ -1,19 +1,11 @@
 package project_1.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+public record AddressDTO(
+        Integer id,
+        String country,
+        String city,
+        String street,
+        String home,
+        Integer postIndex) {
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class AddressDTO {
-    private Integer id;
-    private String country;
-    private String city;
-    private String street;
-    private String home;
-    private Integer postIndex;
 }

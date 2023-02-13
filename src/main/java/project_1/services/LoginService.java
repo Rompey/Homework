@@ -20,7 +20,7 @@ public class LoginService {
     private final UserRepository userRepository;
 
     public TokenDTO createToken(UserLoginDTO userDTO) {
-        User user = getUserIfCorrectLoginOrPassword(userDTO.getUsername(), userDTO.getPassword());
+        User user = getUserIfCorrectLoginOrPassword(userDTO.username(), userDTO.password());
         String token = TokenUtil.generateToken(buildClaims(user), user.getUsername());
 
         return new TokenDTO(token, TokenUtil.expiredTime(token));
